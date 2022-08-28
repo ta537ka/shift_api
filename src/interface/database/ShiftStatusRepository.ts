@@ -19,14 +19,14 @@ export class ShiftStatusRepository extends IShiftStatusRepository {
 
     async find(id: number): Promise<ShiftStatus> {
         const result = await this.connection.execute(
-            "select * from Shift_Statuses where id = ?",
+            "SELECT * FROM Shift_Statuses WHERE id = ?",
             id
         );
         return result;
     }
 
     async findAll(): Promise<ShiftStatus[]> {
-        const query = await this.connection.execute("select * from Shift_Statuses");
+        const query = await this.connection.execute("SELECT * FROM Shift_Statuses");
         const results = query.map((result: any) => {
             return this.convertModel(result);
         })
@@ -35,24 +35,24 @@ export class ShiftStatusRepository extends IShiftStatusRepository {
 
     async persist(shiftStatus: ShiftStatus): Promise<ShiftStatus> {
         const result = await this.connection.execute(
-            "insert into Shift_Statuses (status) values(?)",
+            "INSERT INTO Shift_Statuses(status) VALUES(?)",
             shiftStatus.status
         )
         shiftStatus.id = result.id;
         return result;
     }
 
-    async update(shiftStatus: ShiftStatus): Promise<any> {
+    async update(shiftStatus: ShiftStatus): Promise<ShiftStatus> {
         const result = await this.connection.execute(
-            'update Shift_Statuses set status = ? where id = ?',
+            'UPDATE Shift_Statuses SET status = ? WHERE id = ?',
             [shiftStatus.status, shiftStatus.id]
         )
         return result;
     }
 
-    async delete(id: number): Promise<any> {
+    async delete(id: number): Promise<ShiftStatus> {
         const result = await this.connection.execute(
-            "delete from Shift_Statuses where id = ?",
+            "DELETE FROM Shift_Statuses WHERE id = ?",
             id
         )
         return result;

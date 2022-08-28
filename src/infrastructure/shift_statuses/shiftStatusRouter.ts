@@ -21,7 +21,7 @@ shiftStatusRouter.post('/shift_statuses', async (req: express.Request, res: expr
     res.send(result);
 })
 
-shiftStatusRouter.patch('/shift_statuses/:id', async (req: express.Request, res: express.Response) => {
+shiftStatusRouter.put('/shift_statuses/:id', async (req: express.Request, res: express.Response) => {
     const result = await shiftStatusController.updateShiftStatus(req, res);
     res.send(result);
 })

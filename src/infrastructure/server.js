@@ -7,13 +7,14 @@ const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const staffRouter_1 = __importDefault(require("./staffs/staffRouter"));
 const adminRouter_1 = __importDefault(require("./admins/adminRouter"));
+const shiftStatusRouter_1 = __importDefault(require("./shift_statuses/shiftStatusRouter"));
 const app = (0, express_1.default)();
 const port = 3001;
 const cors = require('cors');
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(body_parser_1.default.json());
 app.use(cors({ origin: true, credentials: true }));
-app.use('/api', staffRouter_1.default, adminRouter_1.default);
+app.use('/api', staffRouter_1.default, adminRouter_1.default, shiftStatusRouter_1.default);
 app.listen(port, () => {
     console.log(`listening port is ${port}`);
 });
