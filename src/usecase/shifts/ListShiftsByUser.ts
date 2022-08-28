@@ -7,7 +7,7 @@ export class ListShiftsByUser {
         this.shiftRepository = shiftRepository;
     }
 
-    execute(user_id: number) {
-        return this.shiftRepository.findByUser(user_id);
+    execute(staff_id: number) {
+        return this.shiftRepository.findByUser(staff_id);
     }
 }

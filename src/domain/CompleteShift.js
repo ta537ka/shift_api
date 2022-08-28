@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CompleteShift = void 0;
 const dayjs = require('dayjs');
 class CompleteShift {
-    constructor(shift_id = 0, term_id = 0, day = dayjs()) {
+    constructor(staff_id = 0, status_id = 0, day = dayjs()) {
         this._id = 0;
-        this._shiftId = shift_id;
-        this._termId = term_id;
+        this._staffId = staff_id;
+        this._statusId = status_id;
         this._day = day;
     }
     get id() {
@@ -15,17 +15,17 @@ class CompleteShift {
     set id(id) {
         this._id = id;
     }
-    get shift_id() {
-        return this._shiftId;
+    get staff_id() {
+        return this._staffId;
     }
-    set shift_id(shift_id) {
-        this._shiftId = shift_id;
+    set staff_id(staff_id) {
+        this._staffId = staff_id;
     }
-    get term_id() {
-        return this._termId;
+    get status_id() {
+        return this._statusId;
     }
-    set term_id(term_id) {
-        this._termId = term_id;
+    set status_id(status_id) {
+        this._statusId = status_id;
     }
     get day() {
         return this._day;

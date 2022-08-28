@@ -16,7 +16,7 @@ shiftRouter.get('/shifts/:id', async (req: express.Request, res: express.Respons
     res.send(result);
 });
 
-shiftRouter.get('/shifts/:user_id', async (req: express.Request, res: express.Response) => {
+shiftRouter.get('/shifts/:staff_id', async (req: express.Request, res: express.Response) => {
     const results = await shiftController.findShiftByUser(req, res);
     res.send(results);
 });

@@ -13,7 +13,7 @@ export class ShiftRepository extends IShiftRepository {
     private convertModel(r: any) {
         const shift = new Shift();
         shift.id = r.id;
-        shift.user_id = r.user_id;
+        shift.staff_id = r.staff_id;
         shift.status_id = r.status_id;
         shift.day = r.day;
         return shift;
@@ -27,6 +27,7 @@ export class ShiftRepository extends IShiftRepository {
         return result;
     }
 
+    //全取得
     // async findAll(): Promise<Shift[]> {
     //     const query = await this.connection.execute("SELECT * FROM Shifts");
     //     const results = query.map((result: number | string | Date) => {
@@ -35,6 +36,7 @@ export class ShiftRepository extends IShiftRepository {
     //     return results;
     // }
 
+    //期間指定
     async findAll(start_date: Date, end_date: Date): Promise<Shift[]> {
         const query = await this.connection.execute(
             "SELECT * FROM Shifts WHERE day BETWEEN ? AND ?",
@@ -46,10 +48,10 @@ export class ShiftRepository extends IShiftRepository {
         return results;
     }
 
-    async findByUser(user_id: number): Promise<Shift[]> {
+    async findByUser(staff_id: number): Promise<Shift[]> {
         const query = await this.connection.execute(
-            "SELECT * FROM Shifts WHERE user_id = ?",
-            user_id
+            "SELECT * FROM Shifts WHERE staff_id = ?",
+            staff_id
         );
         const results = query.map((result: number | string | Date) => {
             return this.convertModel(result);
@@ -59,8 +61,8 @@ export class ShiftRepository extends IShiftRepository {
 
     async persist(shift: Shift): Promise<Shift> {
         const result = await this.connection.execute(
-            "INSERT INTO Shifts(user_id, status_id, day) VALUES(?,?,?)",
-            [shift.user_id, shift.status_id, shift.day]
+            "INSERT INTO Shifts(staff_id, status_id, day) VALUES(?,?,?)",
+            [shift.staff_id, shift.status_id, shift.day]
         );
         shift.id = result.id;
         return result;
@@ -68,8 +70,8 @@ export class ShiftRepository extends IShiftRepository {
 
     async update(shift: Shift): Promise<Shift> {
         const result = await this.connection.execute(
-            "UPDATE Shifts SET status_id = ?, day = ?",
-            [shift.status_id, shift.day]
+            "UPDATE Shifts SET status_id = ?, day = ? WHERE id = ?",
+            [shift.status_id, shift.day, shift.id]
         );
         return result;
     }

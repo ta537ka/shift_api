@@ -8,8 +8,8 @@ export class CreateShift {
         this.shiftRepository = shiftRepository;
     }
 
-    execute(user_id: number, status_id: number, day: Date) {
-        const shift = new Shift(user_id, status_id, day);
+    execute(staff_id: number, status_id: number, day: Date) {
+        const shift = new Shift(staff_id, status_id, day);
         return this.shiftRepository.persist(shift);
     }
 }

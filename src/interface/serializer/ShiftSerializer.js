@@ -1,16 +1,16 @@
-import { Shift } from "../../domain/Shift";
-
-const _serializeSingleShift = (shift: Shift) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ShiftSerializer = void 0;
+const _serializeSingleShift = (shift) => {
     return {
         id: shift.id,
         staff_id: shift.staff_id,
         status_id: shift.status_id,
         day: shift.day
-    }
-}
-
-export class ShiftSerializer {
-    serialize(data: any) {
+    };
+};
+class ShiftSerializer {
+    serialize(data) {
         if (!data) {
             throw new Error('expect data to be not undefined nor null');
         }
@@ -20,3 +20,4 @@ export class ShiftSerializer {
         return _serializeSingleShift(data);
     }
 }
+exports.ShiftSerializer = ShiftSerializer;

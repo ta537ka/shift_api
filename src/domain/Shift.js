@@ -3,10 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Shift = void 0;
 const dayjs = require('dayjs');
 class Shift {
-    constructor(user_id = 0, term_id = 0, status_id = 0, day = dayjs()) {
+    constructor(staff_id = 0, status_id = 0, day = dayjs()) {
         this._id = 0;
-        this._userId = user_id;
-        this._termId = term_id;
+        this._staffId = staff_id;
         this._statusId = status_id;
         this._day = day;
     }
@@ -16,17 +15,11 @@ class Shift {
     set id(id) {
         this._id = id;
     }
-    get user_id() {
-        return this._userId;
+    get staff_id() {
+        return this._staffId;
     }
-    set user_id(user_id) {
-        this._userId = user_id;
-    }
-    get term_id() {
-        return this._termId;
-    }
-    set term_id(term_id) {
-        this._termId = term_id;
+    set staff_id(staff_id) {
+        this._staffId = staff_id;
     }
     get status_id() {
         return this._statusId;

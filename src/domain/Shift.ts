@@ -2,12 +2,12 @@ const dayjs = require('dayjs');
 
 export class Shift {
     private _id: number = 0;
-    private _userId: number;
+    private _staffId: number;
     private _statusId: number;
     private _day: Date;
 
-    constructor(user_id: number = 0, status_id: number = 0, day: Date = dayjs()) {
-        this._userId = user_id;
+    constructor(staff_id: number = 0, status_id: number = 0, day: Date = dayjs()) {
+        this._staffId = staff_id;
         this._statusId = status_id;
         this._day = day;
     }
@@ -20,12 +20,12 @@ export class Shift {
         this._id = id;
     }
 
-    get user_id(): number {
-        return this._userId;
+    get staff_id(): number {
+        return this._staffId;
     }
 
-    set user_id(user_id: number) {
-        this._userId = user_id;
+    set staff_id(staff_id: number) {
+        this._staffId = staff_id;
     }
 
     get status_id(): number {

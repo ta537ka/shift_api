@@ -21,42 +21,42 @@ export class ShiftController {
         const { start_date, end_date } = req.body
         const useCase = new ListShifts(this.shiftRepository);
         const results = await useCase.execute(start_date, end_date);
-        return results;
+        return this.shiftSerializer.serialize(results);
     }
 
     async findShift(req: any, res: any) {
         const id = req.params.id;
         const useCase = new GetShift(this.shiftRepository);
         const result = await useCase.execute(id);
-        return result;
+        return this.shiftSerializer.serialize(result);
     }
 
     async findShiftByUser(req: any, res: any) {
-        const user_id = req.params.user_id;
+        const staff_id = req.params.staff_id;
         const useCase = new ListShiftsByUser(this.shiftRepository);
-        const results = await useCase.execute(user_id);
-        return results;
+        const results = await useCase.execute(staff_id);
+        return this.shiftSerializer.serialize(results);
     }
 
-    async createShift(req: any, res: any){
-        const {user_id, status_id, day} = req.body;
+    async createShift(req: any, res: any) {
+        const { staff_id, status_id, day } = req.body;
         const useCase = new CreateShift(this.shiftRepository);
-        const result = await useCase.execute(user_id,status_id, day);
-        return result;
+        const result = await useCase.execute(staff_id, status_id, day);
+        return this.shiftSerializer.serialize(result);
     }
 
-    async updateShift(req: any, res: any){
+    async updateShift(req: any, res: any) {
         const id = req.params.id;
-        const {status_id, day} = req.body;
+        const { status_id, day } = req.body;
         const useCase = new UpdateShift(this.shiftRepository);
-        const result = await useCase.execute(id,status_id,day);
-        return result;
+        const result = await useCase.execute(id, status_id, day);
+        return this.shiftSerializer.serialize(result);
     }
 
-    async deleteShift(req: any, res: any){
+    async deleteShift(req: any, res: any) {
         const id = req.params.id;
         const useCase = new DeleteShift(this.shiftRepository);
         const result = await useCase.execute(id);
-        return result;
+        return this.shiftSerializer.serialize(result);
     }
 }
