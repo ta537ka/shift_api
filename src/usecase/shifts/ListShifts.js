@@ -5,6 +5,7 @@ class ListShifts {
     constructor(shiftRepository) {
         this.shiftRepository = shiftRepository;
     }
+    // execute(start_date: Date, end_date: Date) {
     execute(start_date, end_date) {
         return this.shiftRepository.findAll(start_date, end_date);
     }

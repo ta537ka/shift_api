@@ -23,11 +23,21 @@ class ShiftController {
         this.shiftSerializer = new ShiftSerializer_1.ShiftSerializer();
         this.shiftRepository = new ShiftRepository_1.ShiftRepository(dbConnection);
     }
+    //admin
     findAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { start_date, end_date } = req.body;
             const useCase = new ListShifts_1.ListShifts(this.shiftRepository);
             const results = yield useCase.execute(start_date, end_date);
+            return this.shiftSerializer.serialize(results);
+        });
+    }
+    //staff
+    findShiftByUser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const staff_id = req.params.staff_id;
+            const useCase = new ListShiftsByUser_1.ListShiftsByUser(this.shiftRepository);
+            const results = yield useCase.execute(staff_id);
             return this.shiftSerializer.serialize(results);
         });
     }
@@ -37,14 +47,6 @@ class ShiftController {
             const useCase = new GetShift_1.GetShift(this.shiftRepository);
             const result = yield useCase.execute(id);
             return this.shiftSerializer.serialize(result);
-        });
-    }
-    findShiftByUser(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const staff_id = req.params.staff_id;
-            const useCase = new ListShiftsByUser_1.ListShiftsByUser(this.shiftRepository);
-            const results = yield useCase.execute(staff_id);
-            return this.shiftSerializer.serialize(results);
         });
     }
     createShift(req, res) {

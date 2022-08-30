@@ -19,14 +19,6 @@ export class ShiftRepository extends IShiftRepository {
         return shift;
     }
 
-    async find(id: number): Promise<Shift> {
-        const result = await this.connection.execute(
-            "SELECT * FROM Shifts WHERE id = ?",
-            id
-        );
-        return result;
-    }
-
     //全取得
     // async findAll(): Promise<Shift[]> {
     //     const query = await this.connection.execute("SELECT * FROM Shifts");
@@ -36,19 +28,54 @@ export class ShiftRepository extends IShiftRepository {
     //     return results;
     // }
 
+    //admin
+
     //期間指定
-    async findAll(start_date: Date, end_date: Date): Promise<Shift[]> {
-        const query = await this.connection.execute(
-            "SELECT * FROM Shifts WHERE day BETWEEN ? AND ?",
-            [start_date, end_date]
-        );
+    async findAll(start_date: string, end_date: string): Promise<Shift[]> {
+        var query;
+        if (start_date == '' && end_date == '') {
+            query = await this.connection.execute(
+                "SELECT * FROM Shifts"
+            );
+        } else if (start_date == '') {
+            const dt = new Date(end_date);
+            query = await this.connection.execute(
+                // `SELECT * FROM Shifts WHERE day <= STR_TO_DATE(${end_date}, '%Y-%m-%d')`
+                "SELECT * FROM Shifts WHERE day <= ?",
+                [dt]
+            );
+        } else if (end_date == '') {
+            const dt = new Date(start_date);
+            query = await this.connection.execute(
+                "SELECT * FROM Shifts WHERE ? <= day",
+                [dt]
+                // `SELECT * FROM Shifts WHERE STR_TO_DATE(${start_date}, '%Y-%m-%d') <= day`
+            );
+        } else {
+            const start_dt = new Date(start_date);
+            const end_dt = new Date(end_date);
+            query = await this.connection.execute(
+                "SELECT * FROM Shifts WHERE day BETWEEN ? AND ?",
+                // [start_date, end_date]
+                [start_dt, end_dt]
+            );
+        }
         const results = query.map((result: number | string | Date) => {
             return this.convertModel(result);
         });
         return results;
     }
 
-    async findByUser(staff_id: number): Promise<Shift[]> {
+    //staff
+    async find(id: number): Promise<Shift> {
+        const result = await this.connection.execute(
+            "SELECT * FROM Shifts WHERE id = ?",
+            id
+        );
+        return result;
+    }
+
+    async findAllByUser(staff_id: number): Promise<Shift[]> {
         const query = await this.connection.execute(
             "SELECT * FROM Shifts WHERE staff_id = ?",
             staff_id

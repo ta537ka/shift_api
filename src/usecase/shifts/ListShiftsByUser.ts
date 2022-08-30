@@ -8,6 +8,6 @@ export class ListShiftsByUser {
     }
 
     execute(staff_id: number) {
-        return this.shiftRepository.findByUser(staff_id);
+        return this.shiftRepository.findAllByUser(staff_id);
     }
 }

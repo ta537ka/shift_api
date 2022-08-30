@@ -17,6 +17,7 @@ export class ShiftController {
         this.shiftRepository = new ShiftRepository(dbConnection);
     }
 
+    //admin
     async findAll(req: any, res: any) {
         const { start_date, end_date } = req.body
         const useCase = new ListShifts(this.shiftRepository);
@@ -24,18 +25,22 @@ export class ShiftController {
         return this.shiftSerializer.serialize(results);
     }
 
-    async findShift(req: any, res: any) {
-        const id = req.params.id;
-        const useCase = new GetShift(this.shiftRepository);
-        const result = await useCase.execute(id);
-        return this.shiftSerializer.serialize(result);
-    }
 
+
+    //staff
     async findShiftByUser(req: any, res: any) {
         const staff_id = req.params.staff_id;
         const useCase = new ListShiftsByUser(this.shiftRepository);
         const results = await useCase.execute(staff_id);
         return this.shiftSerializer.serialize(results);
+    }
+
+
+    async findShift(req: any, res: any) {
+        const id = req.params.id;
+        const useCase = new GetShift(this.shiftRepository);
+        const result = await useCase.execute(id);
+        return this.shiftSerializer.serialize(result);
     }
 
     async createShift(req: any, res: any) {
