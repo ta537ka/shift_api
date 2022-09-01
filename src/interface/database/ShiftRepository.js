@@ -39,30 +39,23 @@ class ShiftRepository extends IShiftRepository_1.IShiftRepository {
         return __awaiter(this, void 0, void 0, function* () {
             var query;
             if (start_date == '' && end_date == '') {
-                console.log("in 1");
                 query = yield this.connection.execute("SELECT * FROM Shifts");
             }
             else if (start_date == '') {
-                console.log("in 2");
                 const dt = new Date(end_date);
-                console.log(dt);
                 query = yield this.connection.execute(
                 // `SELECT * FROM Shifts WHERE day <= STR_TO_DATE(${end_date}, '%Y-%m-%d')`
                 "SELECT * FROM Shifts WHERE day <= ?", [dt]);
             }
             else if (end_date == '') {
-                console.log("in 3");
                 const dt = new Date(start_date);
-                console.log(dt);
                 query = yield this.connection.execute("SELECT * FROM Shifts WHERE ? <= day", [dt]
                 // `SELECT * FROM Shifts WHERE STR_TO_DATE(${start_date}, '%Y-%m-%d') <= day`
                 );
             }
             else {
-                console.log("in 4");
                 const start_dt = new Date(start_date);
                 const end_dt = new Date(end_date);
-                console.log(start_dt + " ~ " + end_dt);
                 query = yield this.connection.execute("SELECT * FROM Shifts WHERE day BETWEEN ? AND ?", 
                 // [start_date, end_date]
                 [start_dt, end_dt]);
