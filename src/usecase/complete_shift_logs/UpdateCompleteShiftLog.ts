@@ -11,7 +11,7 @@ export class UpdateCompleteShiftLog {
         const completeShiftLog = await this.completeShiftLogRepository.find(id);
         completeShiftLog.id = id;
         completeShiftLog.info = info;
-        completeShiftLog.update_at = updated_at;
+        completeShiftLog.updated_at = updated_at;
         return this.completeShiftLogRepository.update(completeShiftLog);
     }
 }

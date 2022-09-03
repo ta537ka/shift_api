@@ -26,11 +26,11 @@ export class CompleteShiftLog {
         this._info = info;
     }
 
-    get update_at(): Date {
+    get updated_at(): Date {
         return this._updatedAt;
     }
 
-    set update_at(update_at: Date) {
-        this._updatedAt = update_at;
+    set updated_at(updated_at: Date) {
+        this._updatedAt = updated_at;
     }
 }
