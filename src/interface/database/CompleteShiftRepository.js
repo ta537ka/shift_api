@@ -35,21 +35,21 @@ class CompleteShiftRepository extends ICompleteShiftRepository_1.ICompleteShiftR
             else if (start_date == '') {
                 const dt = new Date(end_date);
                 query = yield this.connection.execute(
-                // `SELECT * FROM Shifts WHERE day <= STR_TO_DATE(${end_date}, '%Y-%m-%d')`
+                // `SELECT * FROM Complete_Shifts WHERE day <= STR_TO_DATE(${end_date}, '%Y-%m-%d')`
                 "SELECT * FROM Complete_Shifts WHERE day <= ?", [dt]);
             }
             else if (end_date == '') {
                 const dt = new Date(start_date);
                 query = yield this.connection.execute("SELECT * FROM Complete_Shifts WHERE ? <= day", [dt]
-                // `SELECT * FROM Shifts WHERE STR_TO_DATE(${start_date}, '%Y-%m-%d') <= day`
+                // `SELECT * FROM Complete_Shifts WHERE STR_TO_DATE(${start_date}, '%Y-%m-%d') <= day`
                 );
             }
             else {
                 const start_dt = new Date(start_date);
                 const end_dt = new Date(end_date);
-                query = yield this.connection.execute("SELECT * FROM Complete_Shifts WHERE day BETWEEN ? AND ?", 
-                // [start_date, end_date]
-                [start_dt, end_dt]);
+                query = yield this.connection.execute(
+                // `SELECT * FROM Complete_Shifts WHERE day BETWEEN STR_TO_DATE(${start_date}, '%Y-%m-%d') AND STR_TO_DATE(${end_date}, '%Y-%m-%d')`
+                "SELECT * FROM Complete_Shifts WHERE day BETWEEN ? AND ?", [start_dt, end_dt]);
             }
             const results = query.map((result) => {
                 return this.convertModel(result);
@@ -90,23 +90,27 @@ class CompleteShiftRepository extends ICompleteShiftRepository_1.ICompleteShiftR
                 query = yield this.connection.execute("SELECT * FROM Complete_Shifts");
             }
             else if (start_date == '') {
-                const dt = new Date(end_date);
-                query = yield this.connection.execute(
-                // `SELECT * FROM Shifts WHERE day <= STR_TO_DATE(${end_date}, '%Y-%m-%d')`
-                "SELECT * FROM Complete_Shifts WHERE day <= ?", [dt]);
-            }
-            else if (end_date == '') {
-                const dt = new Date(start_date);
-                query = yield this.connection.execute("SELECT * FROM Complete_Shifts WHERE ? <= day", [dt]
-                // `SELECT * FROM Shifts WHERE STR_TO_DATE(${start_date}, '%Y-%m-%d') <= day`
+                // const dt = new Date(end_date);
+                query = yield this.connection.execute(`SELECT * FROM Shifts WHERE day <= STR_TO_DATE(${end_date}, '%Y-%m-%d')`
+                // "SELECT * FROM Complete_Shifts WHERE day <= ?",
+                // [dt]
                 );
             }
+            else if (end_date == '') {
+                // const dt = new Date(start_date);
+                query = yield this.connection.execute(
+                // "SELECT * FROM Complete_Shifts WHERE ? <= day",
+                // [dt]
+                `SELECT * FROM Shifts WHERE STR_TO_DATE(${start_date}, '%Y-%m-%d') <= day`);
+            }
             else {
-                const start_dt = new Date(start_date);
-                const end_dt = new Date(end_date);
-                query = yield this.connection.execute("SELECT * FROM Complete_Shifts WHERE day BETWEEN ? AND ?", 
+                // const start_dt = new Date(start_date);
+                // const end_dt = new Date(end_date);
+                query = yield this.connection.execute(`SELECT * FROM Complete_Shifts WHERE day BETWEEN STR_TO_DATE(${start_date}, '%Y-%m-%d') AND STR_TO_DATE(${end_date}, '%Y-%m-%d')`
+                // "SELECT * FROM Complete_Shifts WHERE day BETWEEN ? AND ?",
                 // [start_date, end_date]
-                [start_dt, end_dt]);
+                // [start_dt, end_dt]
+                );
             }
             const results = query.map((result) => {
                 return this.convertModel(result);

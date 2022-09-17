@@ -56,7 +56,7 @@ export class ShiftRepository extends IShiftRepository {
             const end_dt = new Date(end_date);
             query = await this.connection.execute(
                 "SELECT * FROM Shifts WHERE day BETWEEN ? AND ?",
-                // [start_date, end_date]
+                // `SELECT * FROM Shifts WHERE day BETWEEN STR_TO_DATE(${start_date}, '%Y-%m-%d') AND STR_TO_DATE(${end_date}, '%Y-%m-%d')`
                 [start_dt, end_dt]
             );
         }
