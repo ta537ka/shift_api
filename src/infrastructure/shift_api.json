@@ -1,0 +1,106 @@
+{
+    "openapi": "3.0.0",
+    "basePath": "http://localhost:3001",
+    "info": {
+        "explorer": true,
+        "title": "Shift API",
+        "description": "A short description of API",
+        "termsOfService": "http://localhost:3001/api/staffs",
+        "version": "1.0.0"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/api/staffs": {
+            "get": {
+                "tags": [
+                    "staffs"
+                ],
+                "summary": "Get all staffs.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Staff"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "staffs"
+                ],
+                "summary": "Create a new Staff",
+                "description": "Create a new staff",
+                "produces": "application/json",
+                "parameters": [],
+                "requestBody": {
+                    "required": "true",
+                    "description": "staff to create",
+                    "parameters": [
+                        {
+                            "name": "username",
+                            "required": "true",
+                            "type": "string"
+                        },
+                        {
+                            "name": "password",
+                            "required": "true",
+                            "type": "string"
+                        }
+                    ],
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Staff"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Staff"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Staff": {
+                "type": "object",
+                "required": "id",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "id": 1,
+                    "username": "test1",
+                    "password": "test1"
+                }
+            }
+        }
+    }
+}
