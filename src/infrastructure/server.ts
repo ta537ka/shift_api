@@ -13,9 +13,6 @@ const cors = require('cors');
 
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
-const YAML = require('yamljs');
-const yaml = require('yaml-js');
-// const yamlfile = require('./shift_api.yaml')
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -43,13 +40,7 @@ var options = {
 };
 var swaggerSpec = swaggerJSDoc(options);
 
-// const swaggerDocument = YAML.load('./shift_api.yaml');
-// const swaggerDocument = yaml.load('./shift_api.yaml');
-// const swaggerDocument = yaml.load(yamlfile);
-// const swaggerDocument = YAML.load(yamlfile);
 const swaggerDocument = require('./shift_api.json');
-// console.log(swaggerDocument);
-
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
@@ -58,31 +49,7 @@ app.get('/api-docs.json', function (req, res) {
     res.send(swaggerSpec);
 });
 
-/**
- * @swagger
- * /api/staffs:
- *   post:
- *     description: Login to the application
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: username
- *         description: Username to use for login.
- *         in: formData
- *         required: true
- *         type: string
- *       - name: password
- *         description: User's password.
- *         in: formData
- *         required: true
- *         type: string
- *     responses:
- *       200:
- *         description: login
- */
-
 app.use('/api', staffRouter, adminRouter, shiftStatusRouter, shiftRouter, completeShiftRouter, completeShiftLogRouter);
-
 
 app.listen(port, () => {
     console.log(`listening port is ${port}`);
