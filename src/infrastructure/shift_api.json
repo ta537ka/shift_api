@@ -25,7 +25,7 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "$ref": "#/components/schemas/Staff"
+                                    "$ref": "#/components/schemas/Staffs"
                                 }
                             }
                         }
@@ -46,7 +46,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Staff",
+                                "$ref": "#/components/schemas/Staffs",
                                 "type": "object",
                                 "properties": {
                                     "username": {
@@ -66,7 +66,287 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "$ref": "#/components/schemas/Staff"
+                                    "$ref": "#/components/schemas/Staffs"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/staffs/{id}": {
+            "get": {
+                "tags": [
+                    "staffs"
+                ],
+                "summary": "Get staff.",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Staffs"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "staffs"
+                ],
+                "summary": "Update a Staff",
+                "description": "Update a staff",
+                "produces": "application/json",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": "true",
+                    "description": "staff to update",
+                    "parameters": [],
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Staffs",
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Staffs"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "staffs"
+                ],
+                "summary": "delete staffs.",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Staffs"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admins": {
+            "get": {
+                "tags": [
+                    "admins"
+                ],
+                "summary": "Get all admins.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Admins"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "admins"
+                ],
+                "summary": "Create a new Admin",
+                "description": "Create a new admin",
+                "produces": "application/json",
+                "requestBody": {
+                    "required": "true",
+                    "description": "admin to create",
+                    "parameters": [],
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Admins",
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Admins"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admins/{id}": {
+            "get": {
+                "tags": [
+                    "admins"
+                ],
+                "summary": "Get admin.",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Admins"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "admins"
+                ],
+                "summary": "Update a Admin",
+                "description": "Update a admin",
+                "produces": "application/json",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": "true",
+                    "description": "admin to update",
+                    "parameters": [],
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Admins",
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Admins"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "admins"
+                ],
+                "summary": "delete admins.",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Admins"
                                 }
                             }
                         }
@@ -80,6 +360,7 @@
                     "admin/shifts"
                 ],
                 "summary": "Get all staffs.",
+                "parameters": [],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -105,7 +386,7 @@
                             "application/json": {
                                 "schema": {
                                     "type": "object",
-                                    "$ref": "#/components/schemas/Shift"
+                                    "$ref": "#/components/schemas/Shifts"
                                 }
                             }
                         }
@@ -116,7 +397,7 @@
     },
     "components": {
         "schemas": {
-            "Staff": {
+            "Staffs": {
                 "type": "object",
                 "required": "id",
                 "properties": {
@@ -136,9 +417,78 @@
                     "password": "test1"
                 }
             },
-            "Shift": {
+            "Admins": {
                 "type": "object",
                 "required": "id",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "username": "admin",
+                    "password": "admin"
+                }
+            },
+            "Shift_Statuses": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "status"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "status": {
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                }
+            },
+            "Shifts": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "staff_id",
+                    "status_id",
+                    "day"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "staff_id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "status_id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "day": {
+                        "type": "string",
+                        "format": "date"
+                    }
+                }
+            },
+            "Complete_Shifts": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "staff_id",
+                    "status_id",
+                    "day"
+                ],
                 "properties": {
                     "id": {
                         "type": "integer",
