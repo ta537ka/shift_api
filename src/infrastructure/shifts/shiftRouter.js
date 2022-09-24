@@ -19,7 +19,7 @@ const mysqlConnection = new MysqlConnection_1.MysqlConnection;
 const shiftController = new ShiftController_1.ShiftController(mysqlConnection);
 const shiftRouter = express_1.default.Router();
 //admin
-shiftRouter.get('/admin/shifts', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+shiftRouter.post('/admin/shifts', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const results = yield shiftController.findAll(req, res);
     res.send(results);
 }));

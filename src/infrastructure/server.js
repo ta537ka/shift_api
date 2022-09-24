@@ -16,9 +16,6 @@ const port = 3001;
 const cors = require('cors');
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
-const YAML = require('yamljs');
-const yaml = require('yaml-js');
-// const yamlfile = require('./shift_api.yaml')
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(body_parser_1.default.json());
 app.use(cors({ origin: true, credentials: true }));
@@ -42,39 +39,12 @@ var options = {
     apis: ['./server.ts'],
 };
 var swaggerSpec = swaggerJSDoc(options);
-// const swaggerDocument = YAML.load('./shift_api.yaml');
-// const swaggerDocument = yaml.load('./shift_api.yaml');
-// const swaggerDocument = yaml.load(yamlfile);
-// const swaggerDocument = YAML.load(yamlfile);
 const swaggerDocument = require('./shift_api.json');
-// console.log(swaggerDocument);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.get('/api-docs.json', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerSpec);
 });
-/**
- * @swagger
- * /api/staffs:
- *   post:
- *     description: Login to the application
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: username
- *         description: Username to use for login.
- *         in: formData
- *         required: true
- *         type: string
- *       - name: password
- *         description: User's password.
- *         in: formData
- *         required: true
- *         type: string
- *     responses:
- *       200:
- *         description: login
- */
 app.use('/api', staffRouter_1.default, adminRouter_1.default, shiftStatusRouter_1.default, shiftRouter_1.default, completeShiftRouter_1.default, completeShiftLogRouter_1.default);
 app.listen(port, () => {
     console.log(`listening port is ${port}`);

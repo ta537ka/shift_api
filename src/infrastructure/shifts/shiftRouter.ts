@@ -7,7 +7,7 @@ const shiftController = new ShiftController(mysqlConnection);
 const shiftRouter = express.Router();
 
 //admin
-shiftRouter.get('/admin/shifts', async (req: express.Request, res: express.Response) => {
+shiftRouter.post('/admin/shifts', async (req: express.Request, res: express.Response) => {
     const results = await shiftController.findAll(req, res);
     res.send(results);
 });

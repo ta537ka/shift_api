@@ -39,26 +39,23 @@
                 "summary": "Create a new Staff",
                 "description": "Create a new staff",
                 "produces": "application/json",
-                "parameters": [],
                 "requestBody": {
                     "required": "true",
                     "description": "staff to create",
-                    "parameters": [
-                        {
-                            "name": "username",
-                            "required": "true",
-                            "type": "string"
-                        },
-                        {
-                            "name": "password",
-                            "required": "true",
-                            "type": "string"
-                        }
-                    ],
+                    "parameters": [],
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Staff"
+                                "$ref": "#/components/schemas/Staff",
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
                             }
                         }
                     }
@@ -70,6 +67,45 @@
                                 "schema": {
                                     "type": "object",
                                     "$ref": "#/components/schemas/Staff"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/shifts": {
+            "post": {
+                "tags": [
+                    "admin/shifts"
+                ],
+                "summary": "Get all staffs.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "start_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "end_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Shift"
                                 }
                             }
                         }
@@ -96,9 +132,30 @@
                     }
                 },
                 "example": {
-                    "id": 1,
                     "username": "test1",
                     "password": "test1"
+                }
+            },
+            "Shift": {
+                "type": "object",
+                "required": "id",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "staff_id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "status_id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "day": {
+                        "type": "string",
+                        "format": "date"
+                    }
                 }
             }
         }
