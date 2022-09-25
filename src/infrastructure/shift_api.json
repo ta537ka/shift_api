@@ -354,6 +354,171 @@
                 }
             }
         },
+        "/api/shift_statuses": {
+            "get": {
+                "tags": [
+                    "shift_statuses"
+                ],
+                "summary": "Get all Shift_Statuses.",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Shift_Statuses"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "shift_statuses"
+                ],
+                "summary": "Create a new Shift_Status",
+                "description": "Create a new shift_status",
+                "produces": "application/json",
+                "requestBody": {
+                    "required": "true",
+                    "description": "shift_status to create",
+                    "parameters": [],
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Shift_Statuses",
+                                "type": "object",
+                                "properties": {
+                                    "status": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Shift_Statuses"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/shift_statuses/{id}": {
+            "get": {
+                "tags": [
+                    "shift_statuses"
+                ],
+                "summary": "Get shift_status.",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Shift_Statuses"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "shift_statuses"
+                ],
+                "summary": "Update a Shift_Status",
+                "description": "Update a shift_status",
+                "produces": "application/json",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": "true",
+                    "description": "admin to update",
+                    "parameters": [],
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Shift_Statuses",
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "status": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Shift_Statuses"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "shift_statuses"
+                ],
+                "summary": "delete shift_status.",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Shift_Statuses"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/admin/shifts": {
             "post": {
                 "tags": [
