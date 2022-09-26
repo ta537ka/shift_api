@@ -558,6 +558,195 @@
                     }
                 }
             }
+        },
+        "/api/shifts": {
+            "post": {
+                "tags": [
+                    "staff/shifts"
+                ],
+                "summary": "Get all shifts.",
+                "parameters": [],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "start_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "end_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Shifts"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/staff/shifts": {
+            "post": {
+                "tags": [
+                    "staff/shifts"
+                ],
+                "summary": "Create shift.",
+                "parameters": [],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "staff_id": {
+                                        "type": "integer"
+                                    },
+                                    "status_id": {
+                                        "type": "integer"
+                                    },
+                                    "day": {
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Shifts"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/staff/shifts/{id}": {
+            "get": {
+                "tags": [
+                    "staff/shifts"
+                ],
+                "summary": "Get shift.",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Shifts"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "staff/shifts"
+                ],
+                "summary": "Update a Shift",
+                "description": "Update a shift",
+                "produces": "application/json",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": "true",
+                    "description": "shift to update",
+                    "parameters": [],
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Shifts",
+                                "type": "object",
+                                "properties": {
+                                    "status_id": {
+                                        "type": "integer"
+                                    },
+                                    "day": {
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Shifts"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "staff/shifts"
+                ],
+                "summary": "delete shift.",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Shifts"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {

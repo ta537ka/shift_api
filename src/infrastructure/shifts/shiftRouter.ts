@@ -14,7 +14,7 @@ shiftRouter.post('/admin/shifts', async (req: express.Request, res: express.Resp
 
 
 //staff
-shiftRouter.get('/shifts/:staff_id', async (req: express.Request, res: express.Response) => {
+shiftRouter.post('/shifts', async (req: express.Request, res: express.Response) => {
     const results = await shiftController.findShiftByUser(req, res);
     res.send(results);
 });

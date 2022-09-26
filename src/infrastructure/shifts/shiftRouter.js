@@ -24,7 +24,7 @@ shiftRouter.post('/admin/shifts', (req, res) => __awaiter(void 0, void 0, void 0
     res.send(results);
 }));
 //staff
-shiftRouter.get('/shifts/:staff_id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+shiftRouter.post('/shifts', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const results = yield shiftController.findShiftByUser(req, res);
     res.send(results);
 }));
