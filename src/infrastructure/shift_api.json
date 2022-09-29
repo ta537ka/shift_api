@@ -747,6 +747,235 @@
                     }
                 }
             }
+        },
+        "/api/complete_shifts": {
+            "post": {
+                "tags": [
+                    "admin/complete_shifts"
+                ],
+                "summary": "Get all complete_shifts.",
+                "parameters": [],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "start_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "end_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Complete_Shifts"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/complete_shifts": {
+            "post": {
+                "tags": [
+                    "admin/complete_shifts"
+                ],
+                "summary": "Create complete_shift.",
+                "parameters": [],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "staff_id": {
+                                        "type": "integer"
+                                    },
+                                    "status_id": {
+                                        "type": "integer"
+                                    },
+                                    "day": {
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Complete_Shifts"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/admin/complete_shifts/{id}": {
+            "get": {
+                "tags": [
+                    "admin/complete_shifts"
+                ],
+                "summary": "Get complete_shift.",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Complete_Shifts"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "admin/complete_shifts"
+                ],
+                "summary": "Update a Complete_Shift",
+                "description": "Update a complete_shift",
+                "produces": "application/json",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": "true",
+                    "description": "complete_shift to update",
+                    "parameters": [],
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Complete_Shifts",
+                                "type": "object",
+                                "properties": {
+                                    "status_id": {
+                                        "type": "integer"
+                                    },
+                                    "day": {
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Complete_Shifts"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "admin/complete_shifts"
+                ],
+                "summary": "delete complete_shift.",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Complete_Shifts"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/staff/complete_shifts": {
+            "post": {
+                "tags": [
+                    "staff/complete_shifts"
+                ],
+                "summary": "Get all complete_shifts.",
+                "parameters": [],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "start_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "end_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Complete_Shifts"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {

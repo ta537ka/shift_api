@@ -7,7 +7,7 @@ const completeShiftController = new CompleteShiftController(mysqlConnection);
 const completeShiftRouter = express.Router();
 
 //admin
-completeShiftRouter.get('/admin/complete_shifts', async (req: express.Request, res: express.Response) => {
+completeShiftRouter.post('/complete_shifts', async (req: express.Request, res: express.Response) => {
     const results = await completeShiftController.findAllByAdmin(req, res);
     res.send(results);
 });
@@ -33,7 +33,7 @@ completeShiftRouter.delete('/admin/complete_shifts/:id', async (req: express.Req
 });
 
 //staff
-completeShiftRouter.get('/staff/complete_shifts', async (req: express.Request, res: express.Response) => {
+completeShiftRouter.post('/staff/complete_shifts', async (req: express.Request, res: express.Response) => {
     const results = await completeShiftController.findAllByStaff(req, res);
     res.send(results);
 });
