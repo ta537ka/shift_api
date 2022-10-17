@@ -11,6 +11,7 @@ const shiftStatusRouter_1 = __importDefault(require("./shift_statuses/shiftStatu
 const shiftRouter_1 = __importDefault(require("./shifts/shiftRouter"));
 const completeShiftRouter_1 = __importDefault(require("./complete_shifts/completeShiftRouter"));
 const completeShiftLogRouter_1 = __importDefault(require("./complete_shift_logs/completeShiftLogRouter"));
+const loginRouter_1 = __importDefault(require("./logins/loginRouter"));
 const app = (0, express_1.default)();
 const port = 3001;
 const cors = require('cors');
@@ -45,6 +46,7 @@ app.get('/api-docs.json', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerSpec);
 });
+app.use('/api', loginRouter_1.default);
 app.use('/api', staffRouter_1.default, adminRouter_1.default, shiftStatusRouter_1.default, shiftRouter_1.default, completeShiftRouter_1.default, completeShiftLogRouter_1.default);
 app.listen(port, () => {
     console.log(`listening port is ${port}`);

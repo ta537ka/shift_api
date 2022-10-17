@@ -6,6 +6,9 @@ import shiftStatusRouter from './shift_statuses/shiftStatusRouter';
 import shiftRouter from './shifts/shiftRouter';
 import completeShiftRouter from './complete_shifts/completeShiftRouter';
 import completeShiftLogRouter from './complete_shift_logs/completeShiftLogRouter';
+import loginRouter from './logins/loginRouter';
+
+
 
 const app = express();
 const port = 3001;
@@ -49,6 +52,7 @@ app.get('/api-docs.json', function (req, res) {
     res.send(swaggerSpec);
 });
 
+app.use('/api', loginRouter);
 app.use('/api', staffRouter, adminRouter, shiftStatusRouter, shiftRouter, completeShiftRouter, completeShiftLogRouter);
 
 app.listen(port, () => {
