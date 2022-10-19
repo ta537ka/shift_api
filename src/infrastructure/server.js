@@ -46,6 +46,19 @@ app.get('/api-docs.json', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerSpec);
 });
+// 認証関数
+// const authenticate = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+//     try {
+//         const token = req.headers.authorization;
+//         const decoded = jwt.verify(token, 'my_secret');
+//         req.jwtPayload = decoded;
+//         next();
+//     } catch (error) {
+//         return res.status(401).json({
+//             message: 'Not Authenticated'
+//         });
+//     }
+// }
 app.use('/api', loginRouter_1.default);
 app.use('/api', staffRouter_1.default, adminRouter_1.default, shiftStatusRouter_1.default, shiftRouter_1.default, completeShiftRouter_1.default, completeShiftLogRouter_1.default);
 app.listen(port, () => {
