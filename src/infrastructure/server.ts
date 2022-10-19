@@ -52,6 +52,20 @@ app.get('/api-docs.json', function (req, res) {
     res.send(swaggerSpec);
 });
 
+// 認証関数
+// const authenticate = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+//     try {
+//         const token = req.headers.authorization;
+//         const decoded = jwt.verify(token, 'my_secret');
+//         req.jwtPayload = decoded;
+//         next();
+//     } catch (error) {
+//         return res.status(401).json({
+//             message: 'Not Authenticated'
+//         });
+//     }
+// }
+
 app.use('/api', loginRouter);
 app.use('/api', staffRouter, adminRouter, shiftStatusRouter, shiftRouter, completeShiftRouter, completeShiftLogRouter);
 

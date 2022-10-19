@@ -15,7 +15,6 @@ const GetUserByAdmin_1 = require("../../usecase/logins/GetUserByAdmin");
 const GetUserByStaff_1 = require("../../usecase/logins/GetUserByStaff");
 const LoginRepository_1 = require("../database/LoginRepository");
 const LoginSerializer_1 = require("../serializer/LoginSerializer");
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 class LoginController {
     constructor(dbConnection) {
@@ -28,24 +27,28 @@ class LoginController {
             const useCase = new GetUserByAdmin_1.GetUserByAdmin(this.loginRepository);
             try {
                 const result = yield useCase.excute(username);
-                // 入力したユーザ名に一致するユーザが存在しない場合
-                if (!Object.keys(result).length) {
-                    const error = new Error(`The Username "${username}" was not found`);
-                    console.log(error);
-                    next(error);
-                }
-                const user = Object.values(result);
-                // var token = "";
-                if (password == user[0].password) {
-                    const secret = process.env.JWT_SECRET;
-                    const expire = process.env.JWT_EXPIRATION;
-                    console.log("一致");
-                    // console.log(jwt.sign({ id: user[0].id, username: user[0].username }, secret, { expireIn: expire }));
-                    // const token = jwt.sign({ username: username }, 'my_secret', { expireIn: '3s' });
-                    // console.log(token);
-                }
-                // return res.json(token);
+                // // 入力したユーザ名に一致するユーザが存在しない場合
+                // if (!Object.keys(result).length) {
+                //     const error = new Error(`The Username "${username}" was not found`);
+                //     console.log(error);
+                //     next(error);
+                // }
+                // // パスワードが一致しているかどうか
+                // const user = Object.values(result);
+                // var token;
+                // if (password == user[0].password) {
+                //     // 現状使用できない
+                //     const secret = process.env.JWT_SECRET;
+                //     const expire = process.env.JWT_EXPIRATION;
+                //     // 後で変更する
+                //     token = jwt.sign({ id: user[0].id }, 'my_Secret');
+                // }
                 return this.loginSerializer.serialize(result);
+                // tokenを返す
+                // res.json({
+                //     id: user[0].id,
+                //     token: token
+                // });
             }
             catch (error) {
                 res.status(400).json({ error });
@@ -57,8 +60,6 @@ class LoginController {
             const { username } = req.body;
             const useCase = new GetUserByStaff_1.GetUserByStaff(this.loginRepository);
             const result = yield useCase.excute(username);
-            console.log(result);
-            console.log(this.loginSerializer.serialize(result));
             return this.loginSerializer.serialize(result);
         });
     }
