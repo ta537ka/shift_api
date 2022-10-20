@@ -57,4 +57,22 @@ loginRouter.post('/login/staffs', async (req: express.Request, res: express.Resp
     res.send(result);
 });
 
+const verifyToken = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    const authHeader = req.headers["authorization"];
+    if (authHeader == undefined) {
+        return res.status(400).json({ error: "header error" });
+    }
+    try {
+        const token = jwt.verify(authHeader, jwt_env);
+        console.log(token);
+        next();
+    } catch (error) {
+        res.status(400).json(error);
+    }
+};
+
+loginRouter.get('/auth', verifyToken, (req: express.Request, res: express.Response) => {
+    res.status(200).send("ログイン認証完了")
+});
+
 export default loginRouter;

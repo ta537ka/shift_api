@@ -23,44 +23,28 @@ class LoginController {
     }
     findUserByAdmin(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { username, password } = req.body;
-            const useCase = new GetUserByAdmin_1.GetUserByAdmin(this.loginRepository);
+            const { username } = req.body;
             try {
+                const useCase = new GetUserByAdmin_1.GetUserByAdmin(this.loginRepository);
                 const result = yield useCase.excute(username);
-                // // 入力したユーザ名に一致するユーザが存在しない場合
-                // if (!Object.keys(result).length) {
-                //     const error = new Error(`The Username "${username}" was not found`);
-                //     console.log(error);
-                //     next(error);
-                // }
-                // // パスワードが一致しているかどうか
-                // const user = Object.values(result);
-                // var token;
-                // if (password == user[0].password) {
-                //     // 現状使用できない
-                //     const secret = process.env.JWT_SECRET;
-                //     const expire = process.env.JWT_EXPIRATION;
-                //     // 後で変更する
-                //     token = jwt.sign({ id: user[0].id }, 'my_Secret');
-                // }
                 return this.loginSerializer.serialize(result);
-                // tokenを返す
-                // res.json({
-                //     id: user[0].id,
-                //     token: token
-                // });
             }
             catch (error) {
-                res.status(400).json({ error });
+                return res.status(400).json({ error });
             }
         });
     }
     findUserByStaff(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { username } = req.body;
-            const useCase = new GetUserByStaff_1.GetUserByStaff(this.loginRepository);
-            const result = yield useCase.excute(username);
-            return this.loginSerializer.serialize(result);
+            try {
+                const useCase = new GetUserByStaff_1.GetUserByStaff(this.loginRepository);
+                const result = yield useCase.excute(username);
+                return this.loginSerializer.serialize(result);
+            }
+            catch (error) {
+                return res.status(400).json({ error });
+            }
         });
     }
 }
