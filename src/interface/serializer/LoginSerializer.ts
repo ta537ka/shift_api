@@ -10,7 +10,7 @@ const _serializeSingleLogin = (user: Admin | Staff) => {
 }
 
 export class LoginSerializer {
-    serialize(data: any) {
+    serialize(data: Admin | Staff) {
         if (!data) {
             throw new Error('expect data to be not undefined nor null');
         }
