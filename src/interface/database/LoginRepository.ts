@@ -11,18 +11,18 @@ export class LoginRepository extends ILoginRepository {
         this.connection = connection;
     }
 
-    async findUserByAdmin(username: string): Promise<Admin> {
+    async findUserByAdmin(username: string, password: string): Promise<Admin> {
         const result = await this.connection.execute(
-            "SELECT * FROM Admins WHERE username = ?",
-            username
+            "SELECT * FROM Admins WHERE username = ? and password = ?",
+            [username, password]
         );
         return result;
     }
 
-    async findUserByStaff(username: string): Promise<Staff> {
+    async findUserByStaff(username: string, password: string): Promise<Staff> {
         const result = await this.connection.execute(
-            "SELECT * FROM Staffs WHERE username = ?",
-            username
+            "SELECT * FROM Staffs WHERE username = ? AND password = ?",
+            [username, password]
         );
         return result;
     }

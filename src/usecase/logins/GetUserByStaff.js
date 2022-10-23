@@ -14,9 +14,9 @@ class GetUserByStaff {
     constructor(loginRepsitory) {
         this.loginRepository = loginRepsitory;
     }
-    excute(username) {
+    excute(username, password) {
         return __awaiter(this, void 0, void 0, function* () {
-            const staffUser = yield this.loginRepository.findUserByStaff(username);
+            const staffUser = yield this.loginRepository.findUserByStaff(username, password);
             return staffUser;
         });
     }

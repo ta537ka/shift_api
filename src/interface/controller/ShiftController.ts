@@ -29,7 +29,7 @@ export class ShiftController {
 
     //staff
     async findShiftByUser(req: any, res: any) {
-        const staff_id = req.params.staff_id;
+        const staff_id: number = req.params.staff_id;
         const useCase = new ListShiftsByUser(this.shiftRepository);
         const results = await useCase.execute(staff_id);
         return this.shiftSerializer.serialize(results);
@@ -37,7 +37,7 @@ export class ShiftController {
 
 
     async findShift(req: any, res: any) {
-        const id = req.params.id;
+        const id: number = req.params.id;
         const useCase = new GetShift(this.shiftRepository);
         const result = await useCase.execute(id);
         return this.shiftSerializer.serialize(result);
@@ -51,7 +51,7 @@ export class ShiftController {
     }
 
     async updateShift(req: any, res: any) {
-        const id = req.params.id;
+        const id: number = req.params.id;
         const { status_id, day } = req.body;
         const useCase = new UpdateShift(this.shiftRepository);
         const result = await useCase.execute(id, status_id, day);
@@ -59,7 +59,7 @@ export class ShiftController {
     }
 
     async deleteShift(req: any, res: any) {
-        const id = req.params.id;
+        const id: number = req.params.id;
         const useCase = new DeleteShift(this.shiftRepository);
         const result = await useCase.execute(id);
         return this.shiftSerializer.serialize(result);

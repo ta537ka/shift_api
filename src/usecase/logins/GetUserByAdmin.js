@@ -14,9 +14,9 @@ class GetUserByAdmin {
     constructor(loginRepsitory) {
         this.loginRepository = loginRepsitory;
     }
-    excute(username) {
+    excute(username, password) {
         return __awaiter(this, void 0, void 0, function* () {
-            const adminUser = yield this.loginRepository.findUserByAdmin(username);
+            const adminUser = yield this.loginRepository.findUserByAdmin(username, password);
             return adminUser;
         });
     }

@@ -25,7 +25,7 @@ export class CompleteShiftLogController {
     }
 
     async findCompleteShiftLog(req: any, res: any) {
-        const id = req.params.id;
+        const id: number = req.params.id;
         const useCase = new GetCompleteShiftLog(this.completeShiftLogRepository);
         const result = await useCase.execute(id);
         return this.completeShiftLogSerializer.serialize(result);
@@ -33,24 +33,24 @@ export class CompleteShiftLogController {
 
     //admin
     async createCompleteShiftLog(req: any, res: any) {
-        const updated_at = dayjs().format("YYYY-MM-DD");
-        const info = req.body;
+        const updated_at: Date = dayjs().format("YYYY-MM-DD");
+        const info: string = req.body;
         const useCase = new CreateCompleteShiftLog(this.completeShiftLogRepository);
         const result = await useCase.execute(info, updated_at);
         return this.completeShiftLogSerializer.serialize(result);
     }
 
     async updateCompleteShiftLog(req: any, res: any) {
-        const id = req.params.id;
-        const info = req.body;
-        const updated_at = dayjs().format("YYYY-MM-DD");
+        const id: number = req.params.id;
+        const info: string = req.body;
+        const updated_at: Date = dayjs().format("YYYY-MM-DD");
         const useCase = new UpdateCompleteShiftLog(this.completeShiftLogRepository);
         const result = await useCase.execute(id, info, updated_at);
         return this.completeShiftLogSerializer.serialize(result);
     }
 
     async DeleteCompleteShiftLog(req: any, res: any) {
-        const id = req.params.id;
+        const id: number = req.params.id;
         const useCase = new DeleteCompleteShiftLog(this.completeShiftLogRepository);
         const result = await useCase.execute(id);
         return this.completeShiftLogSerializer.serialize(result);

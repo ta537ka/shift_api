@@ -17,7 +17,7 @@ export class AdminController {
     }
 
     async findAdmin(req: any, res: any) {
-        const id = req.params.id;
+        const id: number = req.params.id;
         const useCase = new GetAdmin(this.adminRepository);
         const result = await useCase.execute(id);
         return this.adminSerializer.serialize(result);
@@ -37,7 +37,7 @@ export class AdminController {
     }
 
     async updateAdmin(req: any, res: any) {
-        const id = req.params.id;
+        const id: number = req.params.id;
         const { username, password } = req.body;
         const useCase = new UpdateAdmin(this.adminRepository);
         const result = await useCase.execute(id, username, password);
@@ -45,7 +45,7 @@ export class AdminController {
     }
 
     async deleteAdmin(req: any, res: any) {
-        const id = req.params.id;
+        const id: number = req.params.id;
         const useCase = new DeleteAdmin(this.adminRepository);
         const result = await useCase.execute(id);
         return this.adminSerializer.serialize(result);

@@ -7,8 +7,8 @@ export class GetUserByAdmin {
         this.loginRepository = loginRepsitory;
     }
 
-    async excute(username: string) {
-        const adminUser = await this.loginRepository.findUserByAdmin(username);
+    async excute(username: string, password: string) {
+        const adminUser = await this.loginRepository.findUserByAdmin(username, password);
         return adminUser;
     }
 }

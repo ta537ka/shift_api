@@ -26,7 +26,7 @@ export class CompleteShiftController {
     }
 
     async findCompleteShift(req: any, res: any) {
-        const id = req.parans.id;
+        const id: number = req.parans.id;
         const useCase = new GetCompleteShift(this.completeShfitRepository);
         const result = await useCase.execute(id);
         return this.completeShiftSerializer.serialize(result);
@@ -40,7 +40,7 @@ export class CompleteShiftController {
     }
 
     async updateCompleteShit(req: any, res: any) {
-        const id = req.params.id;
+        const id: number = req.params.id;
         const { status_id, day } = req.body;
         const useCase = new UpdateCompleteShift(this.completeShfitRepository);
         const result = await useCase.execute(id, status_id, day);
@@ -48,7 +48,7 @@ export class CompleteShiftController {
     }
 
     async deleteCompleteShift(req: any, res: any) {
-        const id = req.params.id;
+        const id: number = req.params.id;
         const useCase = new DeleteCompleteShift(this.completeShfitRepository);
         const result = await useCase.execute(id);
         return this.completeShiftSerializer.serialize(result);

@@ -20,11 +20,11 @@ export class LoginController {
     }
 
     async findUserByAdmin(req: any, res: any, next: any) {
-        const { username } = req.body;
+        const { username, password } = req.body;
 
         try {
             const useCase = new GetUserByAdmin(this.loginRepository);
-            const result = await useCase.excute(username);
+            const result = await useCase.excute(username, password);
             return this.loginSerializer.serialize(result);
         } catch (error) {
             return res.status(400).json({ error });
@@ -32,11 +32,11 @@ export class LoginController {
     }
 
     async findUserByStaff(req: any, res: any) {
-        const { username } = req.body;
+        const { username, password } = req.body;
 
         try {
             const useCase = new GetUserByStaff(this.loginRepository);
-            const result = await useCase.excute(username);
+            const result = await useCase.excute(username, password);
             return this.loginSerializer.serialize(result);
         } catch (error) {
             return res.status(400).json({ error });

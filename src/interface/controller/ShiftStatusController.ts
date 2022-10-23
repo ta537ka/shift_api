@@ -18,7 +18,7 @@ export class ShiftStatusController {
     }
 
     async findShiftStatus(req: any, res: any) {
-        const id = req.params.id;
+        const id: number = req.params.id;
         const useCase = new GetShiftStatus(this.shiftStatusRepository);
         const result = await useCase.execute(id);
         return this.shiftStatusSerializer.serialize(result);
@@ -38,7 +38,7 @@ export class ShiftStatusController {
     }
 
     async updateShiftStatus(req: any, res: any) {
-        const id = req.params.id;
+        const id: number = req.params.id;
         const { status } = req.body;
         const useCase = new UpdateShiftStatus(this.shiftStatusRepository);
         const result = await useCase.execute(id, status);
@@ -46,7 +46,7 @@ export class ShiftStatusController {
     }
 
     async deleteShiftStatus(req: any, res: any) {
-        const id = req.params.id;
+        const id: number = req.params.id;
         const useCase = new DeleteShiftStatus(this.shiftStatusRepository);
         const result = useCase.execute(id);
         return this.shiftStatusSerializer.serialize(result);

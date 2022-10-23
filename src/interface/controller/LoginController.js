@@ -23,10 +23,10 @@ class LoginController {
     }
     findUserByAdmin(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { username } = req.body;
+            const { username, password } = req.body;
             try {
                 const useCase = new GetUserByAdmin_1.GetUserByAdmin(this.loginRepository);
-                const result = yield useCase.excute(username);
+                const result = yield useCase.excute(username, password);
                 return this.loginSerializer.serialize(result);
             }
             catch (error) {
@@ -36,10 +36,10 @@ class LoginController {
     }
     findUserByStaff(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { username } = req.body;
+            const { username, password } = req.body;
             try {
                 const useCase = new GetUserByStaff_1.GetUserByStaff(this.loginRepository);
-                const result = yield useCase.excute(username);
+                const result = yield useCase.excute(username, password);
                 return this.loginSerializer.serialize(result);
             }
             catch (error) {

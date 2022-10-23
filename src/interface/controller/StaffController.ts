@@ -17,7 +17,7 @@ export class StaffController {
     }
 
     async findStaff(req: any, res: any) {
-        const id = req.params.id;
+        const id: number = req.params.id;
         const useCase = new GetStaff(this.staffRepository);
         const result = await useCase.execute(id);
         return this.staffSerializer.serialize(result);
@@ -37,7 +37,7 @@ export class StaffController {
     }
 
     async updateStaff(req: any, res: any) {
-        const id = req.params.id;
+        const id: number = req.params.id;
         const { username, password } = req.body;
         const useCase = new UpdateStaff(this.staffRepository);
         const result = await useCase.execute(id, username, password);
@@ -45,7 +45,7 @@ export class StaffController {
     }
 
     async deleteStaff(req: any, res: any) {
-        const id = req.params.id;
+        const id: number = req.params.id;
         const useCase = new DeleteStaff(this.staffRepository);
         const result = useCase.execute(id);
         return this.staffSerializer.serialize(result);

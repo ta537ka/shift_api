@@ -21,21 +21,14 @@ const mysqlConnection = new MysqlConnection_1.MysqlConnection();
 const loginController = new LoginController_1.LoginController(mysqlConnection);
 const loginRouter = express_1.default.Router();
 const jwt_env = 'my_secret';
-loginRouter.get('/sample', (req, res) => {
-    res.send("HEllo");
-});
 loginRouter.post('/login/admins', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield loginController.findUserByAdmin(req, res, next);
-    // 修正した方が良いかも（anyを減らす）
-    const lists = result;
-    const { id, password } = req.body;
     try {
-        if (!lists.length) {
+        if (!result.length) {
             return res.status(400).json({ message: 'not found user' });
         }
-        if (password != lists[0].password) {
-            return res.status(400).json({ message: 'invalid password' });
-        }
+        // 修正した方が良いかも（anyを減らす）
+        const id = result[0].id;
         // tokenの発行(シークレットは環境変数から呼び出す)
         const token = jsonwebtoken_1.default.sign({ id }, jwt_env);
         res.status(200).json({
@@ -49,19 +42,18 @@ loginRouter.post('/login/admins', (req, res, next) => __awaiter(void 0, void 0, 
 }));
 loginRouter.post('/login/staffs', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield loginController.findUserByStaff(req, res);
-    // 修正した方が良いかも（anyを減らす）
-    const lists = result;
-    const { id, password } = req.body;
     try {
-        if (!lists.length) {
+        if (!result.length) {
             return res.status(400).json({ message: 'not found user' });
         }
-        if (password != lists[0].password) {
-            return res.status(400).json({ message: 'invalid password' });
-        }
+        // if (password != lists[0].password) {
+        //     return res.status(400).json({ message: 'invalid password' });
+        // }
+        // 修正した方が良いかも（anyを減らす）
+        const lists = result;
+        const id = result[0].id;
         // tokenの発行(シークレットは環境変数から呼び出す)
         const token = jsonwebtoken_1.default.sign({ id }, jwt_env);
-        localStorage.setItem('token', token);
         res.status(200).json({
             id: id,
             token: token
@@ -79,6 +71,7 @@ const verifyToken = (req, res, next) => {
     }
     try {
         const token = jsonwebtoken_1.default.verify(authHeader, jwt_env);
+        console.log(token);
         next();
     }
     catch (error) {

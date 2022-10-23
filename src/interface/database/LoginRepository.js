@@ -16,15 +16,15 @@ class LoginRepository extends ILoginRepository_1.ILoginRepository {
         super();
         this.connection = connection;
     }
-    findUserByAdmin(username) {
+    findUserByAdmin(username, password) {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield this.connection.execute("SELECT * FROM Admins WHERE username = ?", username);
+            const result = yield this.connection.execute("SELECT * FROM Admins WHERE username = ? and password = ?", [username, password]);
             return result;
         });
     }
-    findUserByStaff(username) {
+    findUserByStaff(username, password) {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield this.connection.execute("SELECT * FROM Staffs WHERE username = ?", username);
+            const result = yield this.connection.execute("SELECT * FROM Staffs WHERE username = ? AND password = ?", [username, password]);
             return result;
         });
     }
