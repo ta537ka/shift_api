@@ -27,12 +27,14 @@ loginRouter.post('/login/admins', (req, res, next) => __awaiter(void 0, void 0, 
         if (!result.length) {
             return res.status(400).json({ message: 'not found user' });
         }
-        // 修正した方が良いかも（anyを減らす）
         const id = result[0].id;
+        const username = result[0].username;
         // tokenの発行(シークレットは環境変数から呼び出す)
-        const token = jsonwebtoken_1.default.sign({ id }, jwt_env);
+        const token = jsonwebtoken_1.default.sign({ id, username }, jwt_env, { expiresIn: '1h' });
+        console.log(token);
         res.status(200).json({
             id: id,
+            name: username,
             token: token
         });
     }
@@ -46,11 +48,7 @@ loginRouter.post('/login/staffs', (req, res) => __awaiter(void 0, void 0, void 0
         if (!result.length) {
             return res.status(400).json({ message: 'not found user' });
         }
-        // if (password != lists[0].password) {
-        //     return res.status(400).json({ message: 'invalid password' });
-        // }
         // 修正した方が良いかも（anyを減らす）
-        const lists = result;
         const id = result[0].id;
         // tokenの発行(シークレットは環境変数から呼び出す)
         const token = jsonwebtoken_1.default.sign({ id }, jwt_env);
@@ -64,21 +62,4 @@ loginRouter.post('/login/staffs', (req, res) => __awaiter(void 0, void 0, void 0
     }
     res.send(result);
 }));
-const verifyToken = (req, res, next) => {
-    const authHeader = req.headers["authorization"];
-    if (authHeader == undefined) {
-        return res.status(400).json({ error: "header error" });
-    }
-    try {
-        const token = jsonwebtoken_1.default.verify(authHeader, jwt_env);
-        console.log(token);
-        next();
-    }
-    catch (error) {
-        res.status(400).json(error);
-    }
-};
-loginRouter.get('/auth', verifyToken, (req, res) => {
-    res.status(200).send("ログイン認証完了");
-});
 exports.default = loginRouter;
