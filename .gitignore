@@ -6,4 +6,4 @@ node_modules
 # 使用しないファイル
 src/infrastructure/shift_api.yaml
 
-src/*.js
+*.js
