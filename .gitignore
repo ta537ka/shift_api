@@ -1,3 +1,9 @@
 node_modules
+
+# 環境変数
 .env
+
+# 使用しないファイル
 src/infrastructure/shift_api.yaml
+
+src/*.js
