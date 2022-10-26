@@ -67,7 +67,8 @@ const verifyToken = (req: express.Request, res: express.Response, next: express.
 };
 
 app.use('/api', loginRouter);
-app.use('/api', verifyToken, staffRouter, adminRouter, shiftStatusRouter, shiftRouter, completeShiftRouter, completeShiftLogRouter);
+// app.use('/api', verifyToken, staffRouter, adminRouter, shiftStatusRouter, shiftRouter, completeShiftRouter, completeShiftLogRouter);
+app.use('/api', staffRouter, adminRouter, shiftStatusRouter, shiftRouter, completeShiftRouter, completeShiftLogRouter);
 
 app.listen(port, () => {
     console.log(`listening port is ${port}`);
