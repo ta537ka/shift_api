@@ -4,7 +4,7 @@ exports.AdminSerializer = void 0;
 const _serializeSingleAdmin = (admin) => {
     return {
         id: admin.id,
-        userename: admin.username,
+        username: admin.username,
         password: admin.password
     };
 };

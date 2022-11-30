@@ -7,7 +7,7 @@ export class UpdateShiftStatus {
         this.shiftStatusRepository = shiftStatusRepository;
     }
 
-    async execute(id: number, status: number) {
+    async execute(id: number, status: string) {
         const shiftStatus = await this.shiftStatusRepository.find(id);
         shiftStatus.id = id;
         shiftStatus.status = status

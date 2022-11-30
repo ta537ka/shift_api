@@ -8,7 +8,7 @@ export class CreateShiftStatus {
         this.shiftStatusRepository = shiftStatusRepository;
     }
 
-    execute(status: number) {
+    execute(status: string) {
         const shiftStatus = new ShiftStatus(status);
         return this.shiftStatusRepository.persist(shiftStatus);
     }

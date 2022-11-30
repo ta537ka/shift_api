@@ -3,7 +3,7 @@ import { Admin } from "../../domain/Admin";
 const _serializeSingleAdmin = (admin: Admin) => {
     return {
         id: admin.id,
-        userename: admin.username,
+        username: admin.username,
         password: admin.password
     }
 }

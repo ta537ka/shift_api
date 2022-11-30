@@ -1,8 +1,8 @@
 export class ShiftStatus {
     private _id: number = 0;
-    private _status: number;
+    private _status: string;
 
-    constructor(status: number = 0) {
+    constructor(status: string = '') {
         this._status = status;
     }
 
@@ -14,11 +14,11 @@ export class ShiftStatus {
         this._id = id;
     }
 
-    get status(): number {
+    get status(): string {
         return this._status;
     }
 
-    set status(status: number) {
+    set status(status: string) {
         this._status = status;
     }
 }
